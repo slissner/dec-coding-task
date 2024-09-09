@@ -1,16 +1,50 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { type AuthService, authServiceKey } from '@/services/auth-service'
+import { injectStrict } from '@/services/inject-service'
+
+const authService: AuthService = injectStrict(authServiceKey)
+
+const email = ref('')
+const password = ref('')
+
+const authenticationErrorText = ref<string | null>(null)
+
+async function userSubmittedForm(event: Event) {
+  event.preventDefault()
+
+  // TODO Skip programmatic validation and rely on html validation for now...
+
+  console.log('User submitted form.', email.value, password.value)
+
+  try {
+    authenticationErrorText.value = null
+
+    await authService.authenticateUser(email.value, password.value)
+  } catch (error) {
+    console.error('Failed to authenticate user.', error)
+
+    authenticationErrorText.value = 'Failed to log in user!'
+  }
+}
+</script>
+
 <template>
   <main>
     <div class="container-fluid login-form">
-      <form>
+      <form @submit="userSubmittedForm">
         <h1>Login</h1>
 
         <fieldset>
           <label>
             E-Mail
             <input
+              type="email"
               name="email"
+              v-model="email"
               placeholder="E-Mail"
               autocomplete="email"
+              required
             />
           </label>
           <label>
@@ -18,16 +52,19 @@
             <input
               type="password"
               name="password"
+              v-model="password"
               placeholder=""
               autocomplete="password"
+              required
             />
           </label>
         </fieldset>
 
-        <input
-          type="submit"
-          value="Sign in"
-        />
+        <input type="submit" value="Sign in" />
+
+        <div class="authentication-error" v-if="authenticationErrorText != null">
+          {{ authenticationErrorText }}
+        </div>
       </form>
     </div>
   </main>
@@ -37,6 +74,8 @@
 .login-form {
   max-width: 480px;
 }
+
+.authentication-error {
+  color: red;
+}
 </style>
-<script setup lang="ts">
-</script>
