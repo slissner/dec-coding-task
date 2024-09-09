@@ -1,4 +1,4 @@
-import './assets/main.css'
+import "@picocss/pico/css/pico.blue.min.css"
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
