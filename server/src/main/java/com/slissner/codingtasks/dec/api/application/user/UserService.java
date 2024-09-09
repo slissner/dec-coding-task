@@ -1,4 +1,4 @@
-package com.slissner.codingtasks.dec.api.application;
+package com.slissner.codingtasks.dec.api.application.user;
 
 import com.slissner.codingtasks.dec.api.domain.User;
 import com.slissner.codingtasks.dec.api.infrastructure.repository.UserRepository;

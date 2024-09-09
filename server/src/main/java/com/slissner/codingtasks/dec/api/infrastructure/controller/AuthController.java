@@ -1,7 +1,7 @@
 package com.slissner.codingtasks.dec.api.infrastructure.controller;
 
 
-import com.slissner.codingtasks.dec.api.application.AuthService;
+import com.slissner.codingtasks.dec.api.application.auth.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

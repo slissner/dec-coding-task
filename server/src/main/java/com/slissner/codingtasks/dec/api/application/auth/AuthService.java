@@ -1,6 +1,5 @@
-package com.slissner.codingtasks.dec.api.application;
+package com.slissner.codingtasks.dec.api.application.auth;
 
-import com.slissner.codingtasks.dec.api.infrastructure.repository.UserRepository;
 import com.slissner.codingtasks.dec.api.infrastructure.security.JwtUtil;
 import com.slissner.codingtasks.dec.api.infrastructure.security.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;

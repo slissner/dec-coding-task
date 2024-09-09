@@ -1,11 +1,9 @@
 package com.slissner.codingtasks.dec.api.infrastructure.data;
 
-import com.slissner.codingtasks.dec.api.application.CreateUserRequest;
-import com.slissner.codingtasks.dec.api.application.UserService;
-import com.slissner.codingtasks.dec.api.domain.User;
-import com.slissner.codingtasks.dec.api.infrastructure.repository.UserRepository;
+import com.slissner.codingtasks.dec.api.application.user.CreateUserRequest;
+import com.slissner.codingtasks.dec.api.application.user.UserService;
 import jakarta.annotation.PostConstruct;
-import java.util.List;
+
 import java.util.stream.Stream;
 
 import lombok.AllArgsConstructor;
