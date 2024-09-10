@@ -33,3 +33,13 @@ You can log in with the following users:
 
 * User: `test0@test.es`, password: `Test123#`
 * User: `test1@test.es`, password: `Test123!`
+
+## Screenshots
+
+UI:
+
+![ui.png](/docs/ui.png)
+
+Demo Video:
+
+[demo.mov](/docs/demo.mov)
