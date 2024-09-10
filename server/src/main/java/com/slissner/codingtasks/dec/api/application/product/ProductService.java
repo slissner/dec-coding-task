@@ -11,6 +11,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -32,5 +33,36 @@ public class ProductService {
     log.info("New product has been created. [product.id={}]", newProduct.getId());
 
     return newProduct;
+  }
+
+  @Transactional
+  public Product updateProduct(@NonNull final UpdateProductRequest request) {
+    final Product updatedProduct =
+        productRepository
+            .findById(request.id())
+            .map(product -> product.update(request))
+            .map(productRepository::save)
+            .orElseThrow(
+                () ->
+                    new Product.ProductNotFoundException(
+                        "Could not find product with id: " + request.id()));
+
+    log.info("Product has been updated. [product.id={}]", updatedProduct.getId());
+
+    return updatedProduct;
+  }
+
+  public void deleteProduct(final UUID productId) {
+    final Product existingProduct =
+        productRepository
+            .findById(productId)
+            .orElseThrow(
+                () ->
+                    new Product.ProductNotFoundException(
+                        "Could not find product with id: " + productId));
+
+    productRepository.delete(existingProduct);
+
+    log.info("Product has been deleted. [product.id={}]", productId);
   }
 }

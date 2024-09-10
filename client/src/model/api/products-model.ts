@@ -7,3 +7,13 @@ export interface Product {
   name: string
   price: number
 }
+
+export interface CreateProductDto {
+  name: string
+  price: number
+}
+
+export interface UpdateProductDto {
+  name: string
+  price: number
+}

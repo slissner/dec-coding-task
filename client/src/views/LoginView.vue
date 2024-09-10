@@ -8,6 +8,7 @@ const authService: AuthService = injectStrict(authServiceKey)
 const email = ref('')
 const password = ref('')
 
+const isRequestRunning = ref(false)
 const authenticationErrorText = ref<string | null>(null)
 
 async function userSubmittedForm(event: Event) {
@@ -18,6 +19,7 @@ async function userSubmittedForm(event: Event) {
   console.log('User submitted form.', email.value, password.value)
 
   try {
+    isRequestRunning.value = true
     authenticationErrorText.value = null
 
     await authService.authenticateUser(email.value, password.value)
@@ -25,6 +27,8 @@ async function userSubmittedForm(event: Event) {
     console.error('Failed to authenticate user.', error)
 
     authenticationErrorText.value = 'Failed to log in user!'
+  } finally {
+    isRequestRunning.value = false
   }
 }
 </script>
@@ -60,7 +64,7 @@ async function userSubmittedForm(event: Event) {
           </label>
         </fieldset>
 
-        <input type="submit" value="Sign in" />
+        <input type="submit" value="Sign in" :disabled="isRequestRunning" />
 
         <div class="authentication-error" v-if="authenticationErrorText != null">
           {{ authenticationErrorText }}

@@ -13,8 +13,19 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      redirect: { name: 'products' }
+    },
+    {
+      path: '/products',
+      name: 'products',
       component: ProductsView,
+      beforeEnter: [checkUserAuthentication]
+    },
+    {
+      path: '/products/:productId',
+      name: 'productsDetails',
+      component: ProductsView,
+      props: true,
       beforeEnter: [checkUserAuthentication]
     },
     {

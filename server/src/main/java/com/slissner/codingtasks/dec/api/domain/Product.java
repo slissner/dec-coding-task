@@ -1,7 +1,9 @@
 package com.slissner.codingtasks.dec.api.domain;
 
+import com.slissner.codingtasks.dec.api.application.product.UpdateProductRequest;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
@@ -46,5 +48,24 @@ public class Product {
         .name(name)
         .price(price)
         .build();
+  }
+
+  public Product update(@NonNull final UpdateProductRequest request) {
+    Preconditions.checkArgument(StringUtils.isNotBlank(name), "Username cannot be blank");
+    Preconditions.checkArgument(
+        price.compareTo(BigDecimal.ZERO) > 0, "Price must be of positive value");
+
+    this.updatedAt = Instant.now();
+    this.name = request.name();
+    this.price = request.price();
+    return this;
+  }
+
+  public static final class ProductNotFoundException extends RuntimeException {
+    @Serial private static final long serialVersionUID = 1L;
+
+    public ProductNotFoundException(final String message) {
+      super(message);
+    }
   }
 }
