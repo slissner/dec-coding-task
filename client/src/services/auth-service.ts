@@ -1,37 +1,41 @@
-import apiClient from '@/services/api-service'
 import type { AuthRequestDto, AuthResponseDto } from '@/model/api/auth-model'
 import { useSessionStore } from '@/stores/session-store'
 import type { AxiosResponse } from 'axios'
 import router from '@/router'
+import { ApiService } from '@/services/api-service'
 
 export class AuthService {
   private readonly localStorageKey = 'auth'
 
   private readonly sessionStore = useSessionStore()
 
+  constructor(readonly apiService: ApiService) {}
+
   public async authenticateUser(email: string, password: string): Promise<void> {
-    const response = await apiClient.post<AuthRequestDto, AxiosResponse<AuthResponseDto>>('/auth', {
-      email,
-      password
-    })
+    try {
+      const response = await this.apiService.client.post<
+        AuthRequestDto,
+        AxiosResponse<AuthResponseDto>
+      >('/auth', {
+        email,
+        password
+      })
 
-    const { token } = response.data
+      const { token } = response.data
 
-    if (token == null || token.length === 0) {
-      throw new Error('Token was empty – aborting')
+      if (token == null || token.length === 0) {
+        throw new Error('Token was empty – aborting')
+      }
+
+      await this.doLoginUser(response.data.email, token)
+    } catch (error: unknown) {
+      console.error('Failed to login user, rolling back auth...')
+      await this.logoutUser()
+      throw error
     }
-
-    this.sessionStore.loginUser(response.data.email, token)
-
-    localStorage.setItem(
-      this.localStorageKey,
-      JSON.stringify({ email: response.data.email, token })
-    )
-
-    await router.push({ path: '/' })
   }
 
-  public restoreSession() {
+  public async restoreSession() {
     const authJsonRaw = localStorage.getItem(this.localStorageKey)
 
     if (authJsonRaw == null || authJsonRaw.length <= 0) {
@@ -41,17 +45,30 @@ export class AuthService {
     try {
       const { email, token } = JSON.parse(authJsonRaw)
 
-      const sessionStore = useSessionStore()
+      // TODO Check already in the client if token is expired before using it.
 
-      sessionStore.loginUser(email, token)
+      await this.doLoginUser(email, token)
     } catch (error) {
       console.debug('Could not restore auth session from storage – ignoring.', error)
     }
   }
 
+  private async doLoginUser(email: string, token: string) {
+    this.sessionStore.loginUser(email, token)
+
+    localStorage.setItem(this.localStorageKey, JSON.stringify({ email, token }))
+
+    this.apiService.setAuthHeader(token)
+
+    await router.push({ path: '/' })
+  }
+
   public async logoutUser() {
     this.sessionStore.logoutUser()
+
     localStorage.removeItem(this.localStorageKey)
+
+    this.apiService.clearAuthHeader()
 
     await router.push({ name: 'login' })
   }
