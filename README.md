@@ -21,11 +21,15 @@ If you meet the requirements above, just run:
 ./run.sh
 ```
 
-... and it should work.
+Open the front-end app once everything has started up:
+
+```shell
+open http://localhost:5173
+```
 
 ## Users
 
-You can login with the following users:
+You can log in with the following users:
 
 * User: `test0@test.es`, password: `Test123#`
 * User: `test1@test.es`, password: `Test123!`
