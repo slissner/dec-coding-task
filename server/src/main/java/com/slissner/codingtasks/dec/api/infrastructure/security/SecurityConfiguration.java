@@ -33,6 +33,9 @@ public class SecurityConfiguration {
                     // public routes
                     .requestMatchers("/auth", "/auth/**")
                     .permitAll()
+                    // TODO add websocket security!
+                    .requestMatchers("/ws")
+                    .permitAll()
                     // private routes
                     .anyRequest()
                     .authenticated())

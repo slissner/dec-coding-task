@@ -8,6 +8,7 @@ import ProductsTable from '@/components/products/ProductsTable.vue'
 import ProductsForm from '@/components/products/ProductsForm.vue'
 import router from '@/router'
 import type { Product } from '@/model/api/products-model'
+import Websocket from '@/components/websocket/Websocket.vue'
 
 const productsService: ProductsService = injectStrict(productsServiceKey)
 
@@ -35,9 +36,16 @@ async function userClickedDeleteProductButton(id: string) {
   await fetchProducts()
 }
 
-async function fetchProducts() {
-  console.log('handle products have changed')
+async function socketLastUpdatedAtChanged(userId: string, lastChangedAt: Date) {
+  // TODO avoid double fetching if the same user has just changed the products data by comparing userId and lastChangedAt timestamp.
+  console.debug(
+    `User changed products data - fetching products now. [userId=${userId}, lastChangedAt=${lastChangedAt}]`
+  )
 
+  await fetchProducts()
+}
+
+async function fetchProducts() {
   await productsService.fetchProducts()
 }
 </script>
@@ -45,6 +53,7 @@ async function fetchProducts() {
 <template>
   <LoggedInLayout>
     <main>
+      <Websocket @socket-last-updated-changed="socketLastUpdatedAtChanged" />
       <ProductsForm :product="product" @products-have-changed="fetchProducts" />
       <hr />
       <ProductsTable

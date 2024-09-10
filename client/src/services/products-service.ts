@@ -6,8 +6,7 @@ import type {
   ProductsResponseDto,
   UpdateProductDto
 } from '@/model/api/products-model'
-import { loading, success, error, loadingWithData, errorWithData } from '@/model/remote-data-model'
-import type { AuthRequestDto, AuthResponseDto } from '@/model/api/auth-model'
+import { error, errorWithData, loading, loadingWithData, success } from '@/model/remote-data-model'
 import type { AxiosResponse } from 'axios'
 
 export class ProductsService {

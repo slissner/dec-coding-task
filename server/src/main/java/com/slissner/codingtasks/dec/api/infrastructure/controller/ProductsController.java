@@ -6,6 +6,7 @@ import com.slissner.codingtasks.dec.api.application.product.UpdateProductRequest
 import com.slissner.codingtasks.dec.api.domain.Product;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
