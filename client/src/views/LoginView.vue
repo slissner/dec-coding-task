@@ -16,8 +16,6 @@ async function userSubmittedForm(event: Event) {
 
   // TODO Skip programmatic validation and rely on html validation for now...
 
-  console.log('User submitted form.', email.value, password.value)
-
   try {
     isRequestRunning.value = true
     authenticationErrorText.value = null
