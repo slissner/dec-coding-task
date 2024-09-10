@@ -12,3 +12,20 @@ D. coding task
 
 - Front-end: Prettier
 - Back-end: Java Google Code Formatter
+
+## Getting Started
+
+If you meet the requirements above, just run:
+
+```shell
+./run.sh
+```
+
+... and it should work.
+
+## Users
+
+You can login with the following users:
+
+* User: `test0@test.es`, password: `Test123#`
+* User: `test1@test.es`, password: `Test123!`

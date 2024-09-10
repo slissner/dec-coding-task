@@ -19,7 +19,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
   @Override
   public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
     sessions.add(session); // Add the session to the set
-    log.info("New WebSocket connection established. [session.id={}]", session.getId());
+    log.debug("New WebSocket connection established. [session.id={}]", session.getId());
   }
 
   @Override
@@ -27,7 +27,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
       throws Exception {
     super.afterConnectionClosed(session, status);
     sessions.remove(session);
-    log.info("WebSocket connection closed. [session.id={}]", session.getId());
+    log.debug("WebSocket connection closed. [session.id={}]", session.getId());
   }
 
   public void sendMessageToClients(final String message) throws IOException {
