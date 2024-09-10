@@ -2,7 +2,6 @@ package com.slissner.codingtasks.dec.api.infrastructure.websocket;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;

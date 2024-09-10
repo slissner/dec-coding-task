@@ -2,7 +2,6 @@ package com.slissner.codingtasks.dec.api.domain;
 
 import com.slissner.codingtasks.dec.api.application.product.UpdateProductRequest;
 import jakarta.persistence.*;
-
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.time.Instant;

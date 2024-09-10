@@ -5,10 +5,8 @@ import com.slissner.codingtasks.dec.api.application.product.ProductService;
 import com.slissner.codingtasks.dec.api.application.user.CreateUserRequest;
 import com.slissner.codingtasks.dec.api.application.user.UserService;
 import jakarta.annotation.PostConstruct;
-
 import java.math.BigDecimal;
 import java.util.stream.Stream;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,5 +1,7 @@
 package com.slissner.codingtasks.dec.api.application.auth;
 
+import static java.lang.String.format;
+
 import com.slissner.codingtasks.dec.api.infrastructure.security.JwtUtil;
 import com.slissner.codingtasks.dec.api.infrastructure.security.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
@@ -11,8 +13,6 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import static java.lang.String.format;
 
 @Service
 @AllArgsConstructor

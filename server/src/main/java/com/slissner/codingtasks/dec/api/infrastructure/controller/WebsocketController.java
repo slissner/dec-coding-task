@@ -3,15 +3,14 @@ package com.slissner.codingtasks.dec.api.infrastructure.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.slissner.codingtasks.dec.api.domain.Product;
 import com.slissner.codingtasks.dec.api.infrastructure.websocket.WebSocketHandler;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
-
-import java.io.IOException;
-import java.time.Instant;
-import java.util.UUID;
 
 @Controller
 @AllArgsConstructor

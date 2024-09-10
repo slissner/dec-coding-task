@@ -4,12 +4,9 @@ import com.slissner.codingtasks.dec.api.application.product.CreateProductRequest
 import com.slissner.codingtasks.dec.api.application.product.ProductService;
 import com.slissner.codingtasks.dec.api.application.product.UpdateProductRequest;
 import com.slissner.codingtasks.dec.api.domain.Product;
-
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

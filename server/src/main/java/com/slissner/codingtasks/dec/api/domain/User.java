@@ -1,13 +1,11 @@
 package com.slissner.codingtasks.dec.api.domain;
 
 import jakarta.persistence.*;
+import java.util.UUID;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.postgresql.shaded.com.ongres.scram.common.util.Preconditions;
 import org.springframework.lang.NonNull;
-
-import java.io.Serial;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users", schema = "public")
