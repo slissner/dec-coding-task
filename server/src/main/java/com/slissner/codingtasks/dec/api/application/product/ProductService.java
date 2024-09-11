@@ -62,6 +62,7 @@ public class ProductService {
     return updatedProduct;
   }
 
+  @Transactional
   public void deleteProduct(final UUID productId) {
     final Product existingProduct =
         productRepository

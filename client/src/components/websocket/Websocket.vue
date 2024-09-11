@@ -12,14 +12,12 @@ const websocketState: Ref<WebsocketState, WebsocketState> = ref('loading')
 let websocket: WebSocket | null = null
 
 onMounted(() => {
-  // Create a WebSocket connection
   websocket = new WebSocket('ws://localhost:5173/ws')
 
   websocket.onopen = function () {
     websocketState.value = 'opened'
   }
 
-  // On message received from server
   websocket.onmessage = function (event) {
     const data = JSON.parse(event.data)
 
@@ -34,13 +32,11 @@ onMounted(() => {
     emit('socket-last-updated-changed', userId, lastChangedAt)
   }
 
-  // Handle WebSocket close
   websocket.onclose = function () {
     console.warn('WebSocket connection closed')
     websocketState.value = 'closed'
   }
 
-  // Handle WebSocket error
   websocket.onerror = function (error) {
     console.error('WebSocket error', error)
   }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @Slf4j
-@Transactional
 public class UserService {
   private final PasswordEncoder passwordEncoder;
   private final UserRepository userRepository;
